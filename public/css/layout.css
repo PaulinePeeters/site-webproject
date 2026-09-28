@@ -1,0 +1,773 @@
+/* CSS custom properties --------------------------------- */
+:root {
+    --primary-color: #355571;
+    --accent-color:  #67a9a9;
+    --bg-light:      #f2f2f2;
+    --font-main:     seravek-web, sans-serif;
+    --header-h:      90px;
+}
+
+/*==========================================================
+  1. SCROLLBAR
+==========================================================*/
+body::-webkit-scrollbar { width: 15px; }
+body {
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-color) #eee;
+}
+body::-webkit-scrollbar-track  { background: #eee; }
+body::-webkit-scrollbar-thumb  {
+    background-color: var(--primary-color);
+    border-radius: 6px;
+    border: 3px solid #eee;
+}
+
+/*==========================================================
+  2. GLOBAL
+==========================================================*/
+.fullsite { overflow: hidden; }
+a {
+    color: var(--primary-color);
+    transition: color .3s;
+    text-decoration: none;
+}
+
+/*==========================================================
+  3. HEADER  (replaces all negative-margin hacks)
+==========================================================*/
+header.top {
+    position: relative;
+    z-index: 1000;
+    background: #fff;
+    height: 200px;
+    padding: 30px clamp(1.5rem, 3vw, 58px) 0 clamp(1.5rem, 4.7vw, 90px);
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    box-shadow: none;
+}
+
+/* Figure = logo + tagline + trait */
+header.top figure {
+    display: block;
+    margin: 0;
+    position: relative;
+    z-index: 1;
+    width: 400px;
+    flex-shrink: 0;
+}
+header.top .logo img {
+    height: 75px;
+    width: auto;
+    display: block;
+    margin: 0;
+}
+header.top .logo { display: block; }
+
+figcaption {
+    font-size: 1.05em;
+    color: var(--primary-color);
+    white-space: nowrap;
+    margin: 8px 0 0 2px;
+}
+
+hr.trait {
+    display: block;
+    position: absolute;
+    left: 415px;
+    width: clamp(180px, 26vw, 500px);
+    top: 25px;
+    height: 1px;
+    border: none;
+    margin: 0;
+    background: linear-gradient(to right, #355571, #8c8b8b, #f0f0f0);
+    z-index: 0;
+}
+
+header.top .comm {
+    position: absolute;
+    top: -30px;
+    left: 450px;
+    pointer-events: none;
+    z-index: 0;
+}
+header.top .comm img {
+    height: 205px;
+    width: auto;
+    max-width: none;
+    margin: 0;
+    opacity: 0.25;
+}
+
+/* Desktop nav */
+header.top nav.main-nav {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    margin: 0;
+    margin-top: 25px;
+}
+
+/* sf-menu horizontal bar */
+.sf-menu {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: .15rem;
+    float: none;
+    margin: 0;
+}
+.sf-menu > li { position: relative; margin: 0; float: none; }
+.sf-menu > li > a {
+    display: block;
+    padding: .45rem .85rem;
+    color: var(--primary-color);
+    font-size: clamp(11px, .7vw, 13px);
+    font-family: var(--font-main);
+    font-weight: 400;
+    letter-spacing: .08em;
+    border-radius: 5px;
+    white-space: nowrap;
+    transition: background .25s;
+    margin-left: 0;
+}
+.sf-menu > li > a:hover { background: var(--bg-light); }
+
+.sf-menu ul {
+    position: absolute;
+    display: none;
+    top: calc(100% + 6px);
+    left: 0;
+    z-index: 99;
+    min-width: 200px;
+    background: #fff;
+    box-shadow: 0 4px 14px rgba(0,0,0,.15);
+    border-radius: 4px;
+    overflow: hidden;
+    margin: 0;
+}
+.sf-menu ul li { float: none; margin: 0; }
+.sf-menu ul li a {
+    display: block;
+    padding: 10px 16px;
+    color: var(--primary-color);
+    background: #fff;
+    font-size: 14px;
+    margin-left: 0;
+    border-radius: 0;
+}
+.sf-menu ul li a:hover { background: var(--accent-color); color: #fff; }
+.sf-menu li:hover > ul,
+.sf-menu li.sfHover > ul { display: block; }
+
+/* Mobile burger */
+header.top nav.mobile-nav {
+    display: none;
+    font-size: 1.7rem;
+    float: none;
+    margin: 0;
+    position: relative;
+    z-index: 1;
+}
+header.top nav.mobile-nav a { color: var(--primary-color); }
+
+/* Switch to burger at 1000 px */
+@media (max-width: 1000px) {
+    header.top { height: 160px; }
+    header.top nav.main-nav { display: none; }
+    header.top nav.mobile-nav { display: block; margin-top: 5px; }
+    header.top figure { width: 300px; }
+    header.top .logo img { height: 55px; }
+    hr.trait { left: 320px; width: 34vw; top: 30px; }
+    header.top .comm { left: min(46vw, 450px); }
+    header.top .comm img { height: 210px; margin: 0; }
+}
+@media (max-width: 570px) {
+    header.top { padding: 20px 1rem 0 1.25rem; height: 145px; }
+    header.top .logo img { height: 38px; }
+    header.top figure figcaption { font-size: 0.8em; margin: 4px 0 0 2px; display: block !important; visibility: visible !important; opacity: 1 !important; color: var(--primary-color) !important; left: auto !important; position: static !important; }
+    hr.trait { left: 215px; top: 32px; width: 45vw; }
+    header.top nav.mobile-nav { margin-top: -8px; }
+    header.top .comm {
+        opacity: .30;
+        left: auto;
+        right: -40px;
+        transform: none;
+        top: -12px;
+    }
+    header.top .comm img {
+        height: 140px;
+        margin: 0;
+    }
+}
+
+/*==========================================================
+  4. BANNER / SLIDER
+==========================================================*/
+.banner {
+    margin-top: 0;
+}
+video { width: 100%; height: auto; display: block; }
+
+.servicesButton {
+    float: right;
+    position: relative;
+    background: var(--accent-color);
+    color: #fff;
+    padding: 10px 15px;
+    text-decoration: none;
+    margin-top: -28px;
+    margin-right: clamp(16px, 5vw, 100px);
+    line-height: 1;
+}
+.servicesButton p      { font-size: clamp(.9em,2vw,2em); color:#fff; letter-spacing:.2em; }
+.servicesButton strong  { font-size: clamp(.8em,1.5vw,1.4em); letter-spacing:.15em; font-weight:300; }
+
+/*==========================================================
+  5. HOMEPAGE SECTIONS (offre / accompagnement)
+==========================================================*/
+.offer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 2rem;
+    max-width: 1100px;
+    margin: 3rem auto;
+    padding: 0 1.5rem;
+}
+.offre, .accompagnement {
+    flex: 1 1 280px;
+    letter-spacing: .15em;
+}
+.accompagnement { text-align: right; }
+.offre h2, .accompagnement h2 {
+    font-weight: 300;
+    font-size: clamp(1.8em,4vw,4em);
+    letter-spacing: .2em;
+    line-height: .95em;
+}
+.offre p, .accompagnement p {
+    font-weight: 300;
+    color: #000;
+    font-size: clamp(.95em,1.4vw,1.5em);
+    letter-spacing: .2em;
+}
+.prix { font-weight:700; font-size:1.2em; letter-spacing:.2em; color:var(--accent-color); }
+
+.devisButton, .contactButton {
+    display: inline-block;
+    background: var(--accent-color);
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+    line-height: 1;
+    margin-top: 8px;
+}
+.contactButton { float: right; }
+.devisButton p, .contactButton p  { font-size: clamp(.9em,1.5vw,2em); color:#fff; }
+.devisButton strong, .contactButton strong { font-size: clamp(.8em,1.2vw,1.4em); font-weight:300; letter-spacing:.15em; }
+
+@media (max-width: 570px) {
+    .offer { flex-direction: column; }
+    .accompagnement { text-align: left; }
+    .contactButton  { float: none; }
+}
+
+/*==========================================================
+  6. SCHEMA
+==========================================================*/
+.schema h2 {
+    font-weight: 300;
+    margin-top: 80px;
+    text-align: center;
+    font-size: clamp(2em,6vw,6em);
+}
+.schema h2 strong { letter-spacing:.1em; font-size:.7em; }
+.schema .obj {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+}
+.schema .comm img  { float: right; width: 80%; }
+.schema .tourbillon {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+}
+.tourbillon img    { display:block; margin:0 auto; width:70%; }
+
+@media (max-width: 768px) {
+    .schema .obj { display: flex; flex-direction: column; align-items: center; padding: 0 1.5rem; }
+    .schema .tourbillon { position: relative; width: 100%; }
+    .schema .comm img { width: 100%; max-width: 400px; float: none; margin-bottom: 2rem; }
+    .tourbillon img   { width: 100%; max-width: 400px; }
+}
+
+/*==========================================================
+  7. ABOUT US (presentation / Virg / Pau)
+==========================================================*/
+.aboutus { width: 100%; position: relative; }
+.flechebas img { display:block; margin:0 auto; width:40%; }
+
+.spec {
+    font-weight: 200;
+    font-size: clamp(.9em,1.5vw,1.5em);
+    line-height: 3em;
+    text-align: left;
+    display: inline-block;
+}
+.deux { font-size:1.5em; display:inline-block; }
+.deux p { font-weight:200; color:var(--accent-color); }
+
+.presentation {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2.5rem;
+    margin: 50px auto;
+    max-width: 1000px;
+    padding: 0 1.5rem;
+}
+.Virg, .Pau { flex: 1 1 260px; }
+.Pau { text-align: right; }
+.Virg h2, .Pau h2 { font-weight:200; font-size:clamp(1.4em,2vw,3em); letter-spacing:.05em; }
+.Virg h2 strong, .Pau h2 strong { font-weight:700; color:var(--accent-color); }
+.Virg h3, .Pau h3 { font-weight:200; color:var(--accent-color); font-size:clamp(1.2em,1.8vw,2.5em); letter-spacing:.05em; }
+.Virg p, .Pau p   { font-weight:300; font-size:clamp(.9em,1.3vw,1.5em); line-height:1.4em; }
+.portrait1 img, .portrait2 img { width:min(30%, 130px); border-radius:50%; }
+
+@media (max-width: 570px) {
+    .presentation { flex-direction: column; }
+    .Pau { text-align: left; }
+}
+
+/*==========================================================
+  8. FOOTER
+==========================================================*/
+footer {
+    position: relative;
+    width: 100%;
+    margin-top: 80px;
+    padding: 60px 2rem;
+}
+footer h2 {
+    padding-left: 45px;
+    font-size: 25px;
+    text-transform: uppercase;
+    color: var(--primary-color);
+    margin-bottom: 30px;
+    font-weight: bold;
+}
+.networks_linking img { display:inline-block; width:2.5em; height:2.5em; margin-left:5px; transition:opacity .3s; }
+.networks_linking img:hover { opacity:.7; }
+footer .contact-info img { width:2em; }
+.number-responsive { display: none; }
+.copy { text-align:center; margin-top:20px; }
+
+@media (max-width: 835px) {
+    .number-responsive { display: inline-block; }
+    .number-desktop    { display: none; }
+    footer { padding: 40px 1.5rem; overflow-x: hidden; }
+
+    footer .container,
+    footer .foot-adress,
+    footer .row,
+    footer [class^="col-"], 
+    footer [class*=" col-"] {
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        float: none !important;
+        box-sizing: border-box !important;
+    }
+    
+    footer h2 {
+        padding: 0 !important;
+        margin: 0 0 1rem 0 !important;
+        text-align: center;
+        font-size: 1.8rem;
+    }
+    footer .networks_linking {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+    footer .contact-info .row {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+    }
+    footer .contact-info [class^="col-"] {
+        margin-bottom: 10px !important;
+        text-align: center !important;
+    }
+    footer .contact-info i,
+    footer .contact-info img {
+        margin: 0 auto !important;
+        display: block !important;
+    }
+}
+@media (max-width: 395px) {
+    footer h2 { font-size: 1.5em; }
+}
+
+/*==========================================================
+  9. CONTACT PAGE
+==========================================================*/
+body.page-contact {
+
+    /* Two-column grid: tagline left | form right */
+    & .contact-page-inner {
+        display: grid;
+        grid-template-columns: 1fr 1.2fr;
+        align-items: start;
+        gap: 2.5rem;
+        max-width: 960px;
+        margin: calc(var(--header-h) + 2rem) auto 3rem;
+        padding: 0 1.5rem;
+    }
+
+    & .formButton {
+        float: none;
+        width: auto;
+        margin: 0;
+        background: #fff;
+        color: var(--accent-color);
+        padding: 2rem 1.5rem;
+        position: static;
+    }
+    & .formButton p {
+        font-weight: 400;
+        font-style: normal;
+        letter-spacing: .2em;
+        font-size: clamp(1.2em,2vw,2em);
+        margin-bottom: .5rem;
+    }
+    & .formButton strong {
+        font-weight: 300;
+        font-size: clamp(1em,1.5vw,1.4em);
+        letter-spacing: .15em;
+        line-height: 1.4;
+        display: block;
+    }
+
+    & .contact-form {
+        margin: 0;
+        box-sizing: border-box;
+        border-radius: 5px;
+        background-color: var(--bg-light);
+        padding: 20px;
+        width: 100%;
+        max-width: none;
+    }
+    & .contact-form h2 { text-align: center; margin-bottom: 1rem; }
+
+    & input[type=text],
+    & textarea,
+    & input[type=email],
+    & input[type=tel] {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        margin-top: 4px;
+        margin-bottom: 14px;
+        resize: vertical;
+        font-family: inherit;
+    }
+    & label { display: block; width: 100%; margin: 0; }
+
+    & input[type=submit] {
+        background-color: var(--accent-color);
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-family: inherit;
+        font-size: 1em;
+        width: 100%;
+        transition: opacity .3s;
+    }
+    & input[type=submit]:hover { opacity: .85; }
+
+    & .gdpr {
+        margin-bottom: 20px;
+        display: flex;
+        align-items: flex-start;
+        gap: .5rem;
+    }
+    & .gdpr label { display: inline !important; font-weight: normal; }
+    & .gdpr input[type=checkbox] { margin-top: 3px; flex-shrink: 0; margin-right: 0; }
+
+    & .form-success {
+        grid-column: 1 / -1;
+        background: #d4edda; color: #155724;
+        border: 1px solid #c3e6cb;
+        border-radius: 4px; padding: 12px 16px; margin-bottom: 1rem;
+    }
+    & .form-error {
+        grid-column: 1 / -1;
+        background: #f8d7da; color: #721c24;
+        border: 1px solid #f5c6cb;
+        border-radius: 4px; padding: 12px 16px; margin-bottom: 1rem;
+    }
+
+    & .footer-contact { margin-top: 50px; }
+
+    @media (max-width: 768px) {
+        & .contact-page-inner {
+            grid-template-columns: 1fr;
+            margin-top: calc(var(--header-h) + 1rem);
+        }
+    }
+}
+
+/*==========================================================
+  10. ACCUEIL PAGE (INDEX) — Override/complement style.css
+==========================================================*/
+body.page-accueil {
+
+    /* Notre offre */
+    & .offer {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        max-width: 1000px;
+        margin: 4rem auto 0 !important;
+        padding: 0 1.5rem;
+    }
+    & .offre, & .accompagnement {
+        margin: 0 !important;
+        padding: 2rem !important;
+        width: auto !important;
+        float: none !important;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    /* Schéma et objectifs */
+    & .schema .obj {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-top: 2rem;
+    }
+    & .schema .comm, & .schema .tourbillon {
+        margin: 0 !important;
+        float: none !important;
+        width: auto !important;
+    }
+    & .schema .comm img, & .schema .tourbillon img {
+        margin: 0 !important;
+        max-width: 100% !important;
+    }
+
+    /* À propos / Portraits — cf. maquette desktop */
+    & .aboutus {
+        display: flex;
+        flex-direction: column;
+        gap: 3rem;
+        margin: 5rem auto;
+        max-width: 1450px;
+        padding: 0 1.5rem;
+    }
+
+    /* Ligne « WEBPROJECT ▼  2  SPÉCIALISTES À VOTRE SERVICE » */
+    & .flechebas {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 3rem;
+        position: relative;
+    }
+    & .flechebas > img {
+        margin: 0 !important;
+        position: static !important;
+        float: none !important;
+        width: min(45%, 560px) !important;
+    }
+    & .flechebas p, & .deux, & .spec {
+        margin: 0 !important;
+        position: static !important;
+        float: none !important;
+    }
+    & .deux p {
+        font-size: clamp(6rem, 11vw, 12rem) !important;
+        line-height: .9 !important;
+        font-weight: 200;
+    }
+    & .spec p {
+        font-size: clamp(1.4rem, 2.2vw, 2.4rem) !important;
+        line-height: 1.3 !important;
+        color: var(--primary-color);
+        font-weight: 300;
+        text-align: left;
+    }
+
+    /* Deux fiches décalées : Virginie à gauche, Pauline plus bas à droite */
+    & .presentation {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem 4rem;
+        margin: 0 !important;
+        width: auto !important;
+        max-width: none;
+        padding: 0;
+        align-items: start;
+    }
+    & .Virg, & .Pau {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        column-gap: 1.5rem;
+        align-items: start;
+        margin: 0 !important;
+        position: static !important;
+        float: none !important;
+        text-align: left;
+    }
+    & .Pau { margin-top: 11rem !important; }
+    & .Virg h2, & .Pau h2 {
+        grid-column: 1 / -1;
+        margin: 0 !important;
+        text-align: left;
+    }
+    & .Virg h3, & .Pau h3 {
+        grid-column: 1 / -1;
+        margin: 0 0 1.5rem !important;
+        text-align: center;
+    }
+    & .portrait1 img, & .portrait2 img {
+        display: block;
+        width: 250px !important;
+        max-width: 40vw !important;
+        border-radius: 0; /* photos rectangulaires comme la maquette */
+        margin: 0 !important;
+        position: static !important;
+        float: none !important;
+    }
+    & .Virg p, & .Pau p {
+        margin: 0 !important;
+        width: auto !important;
+        max-width: min(380px, 100%);
+        font-size: 1.05rem !important;
+        line-height: 1.55 !important;
+        position: static !important;
+        float: none !important;
+        text-align: left;
+    }
+
+    @media (max-width: 850px) {
+        & .offer { grid-template-columns: 1fr; }
+        & .presentation { grid-template-columns: 1fr; }
+        & .flechebas { flex-direction: column; text-align: center; gap: 1rem; }
+        & .spec p { text-align: center; }
+        & .Pau { margin-top: 0 !important; }
+    }
+    @media (max-width: 570px) {
+        & .Virg, & .Pau { grid-template-columns: 1fr; justify-items: center; }
+        & .Virg p, & .Pau p { text-align: center; margin-top: 1rem !important; }
+        & .Virg h2, & .Pau h2 { text-align: center; }
+    }
+}
+
+/*==========================================================
+  11. SERVICES PAGE — override/complement style.css
+==========================================================*/
+body.page-services {
+
+    & .columns {
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: stretch;
+        margin-bottom: 50px;
+    }
+    & .column1 {
+        width: 50%;
+        padding: 30px 50px 30px 30px;
+        text-align: right;
+        background-color: var(--accent-color);
+        min-height: 450px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        margin-left: 0;
+    }
+    & .column1-1 {
+        width: 50%;
+        padding: 30px 50px 30px 30px;
+        text-align: right;
+        background-color: var(--primary-color);
+        min-height: 450px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        margin-left: 0;
+    }
+    & .column1 h2, & .column1-1 h2 {
+        width: auto;
+        max-width: 100%;
+        font-size: clamp(1.4rem, 2.5vw, 2.5rem);
+        line-height: 1.2;
+        margin-bottom: 1rem;
+        word-wrap: break-word;
+        hyphens: auto;
+    }
+    & .column2 {
+        width: 50%;
+        padding: 30px 30px 60px 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        margin-top: 0;
+    }
+    & .ff-button--block,
+    & .ff-button--block1,
+    & .ff-button--block2 {
+        display: block;
+        width: max-content;
+        align-self: flex-end;
+        margin-right: 0;
+        float: none;
+        color: #fff !important;
+        margin-top: 2rem;
+        padding: 15px 30px;
+        text-align: center;
+        font-size: 1.1rem;
+        transition: opacity 0.3s;
+    }
+    & .ff-button--block:hover,
+    & .ff-button--block1:hover,
+    & .ff-button--block2:hover {
+        opacity: 0.85;
+    }
+    & .serv-trait {
+        border: none;
+        border-top: 1px solid rgba(53,85,113,.2);
+        margin: 1rem 0;
+    }
+
+    @media (max-width: 1200px) {
+        & .columns { flex-wrap: wrap; }
+        & .column1, & .column1-1 { width: 100%; min-height: 200px; }
+        & .column2 { width: 100%; }
+    }
+    @media (max-width: 768px) {
+        & .column1 p, & .column1-1 p { font-size: .9em; }
+        & .ff-button--block, & .ff-button--block1, & .ff-button--block2 {
+            width: auto; 
+            align-self: flex-start;
+            margin-top: 1.5rem;
+            padding: 12px 20px;
+            font-size: 1rem;
+        }
+    }
+}

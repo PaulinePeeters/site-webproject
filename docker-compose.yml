@@ -1,0 +1,11 @@
+services:
+  webproject:
+    image: registry.gitlab.com/ppeeters05/site-webproject:latest
+    container_name: webproject
+    restart: unless-stopped
+    networks:
+      - proxy_network
+
+networks:
+  proxy_network:
+    external: true

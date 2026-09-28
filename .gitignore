@@ -1,0 +1,15 @@
+# Dépendances
+node_modules/
+
+# Config sensibles (gérés par variables CI/CD GitLab)
+config/smtp_config.php
+config/recaptcha_config.php
+
+# IDE
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
